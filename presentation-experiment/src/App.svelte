@@ -1,5 +1,4 @@
-<script>
-  const elements = ['Fire', 'Water', 'Air', 'Earth']
+<script> 
   const recipes = {
     'Fire+Fire': 'Lava',
     'Fire+Water': 'Steam',
@@ -13,12 +12,15 @@
     'Water+Water': 'Ocean',
   }
 
+  let elements = $state(['Fire', 'Water', 'Air', 'Earth'])
+
   let firstElement = $state('Fire')
   let secondElement = $state('Water')
   let result = $state('')
 
   function combine() {
     result = recipes[[firstElement, secondElement].sort().join('+')] ?? 'Nothing'
+    if (!elements.includes(result) && result !== 'Nothing') {elements.push(result)}
   }
 </script>
 
@@ -42,3 +44,4 @@
 
   button { margin: 12px; }
 </style>
+
