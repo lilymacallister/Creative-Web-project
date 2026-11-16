@@ -1,5 +1,5 @@
 /**
- * src/lib/server/sketchApi.js — the ONE place this app talks to Express.
+ * src/lib/server/plantApi.js — the ONE place this app talks to Express.
  * ------------------------------------------------------------------
  * The +page.server.js and +server.js files call these functions; these
  * functions make the actual fetch() to Express, server to server. The
@@ -16,39 +16,39 @@
  * ------------------------------------------------------------------
  */
 
-import { SKETCH_API_URL } from '$app/env/private';
+import { PLANT_API_URL } from '$app/env/private';
 
-// Get every sketch.
-export async function fetchSketches() {
+// Get every plant.
+export async function fetchPlants() {
 	// await means: pause here until Express answers, then carry on.
-	const res = await fetch(`${SKETCH_API_URL}/api/sketches`);
+	const res = await fetch(`${PLANT_API_URL}/api/plants`);
 
 	if (!res.ok) {
-		throw new Error(`Sketch API responded with ${res.status}`);
+		throw new Error(`Plant API responded with ${res.status}`);
 	}
 
 	return res.json();
 }
 
-// Add a sketch. `data` looks like { title, artist, colorTag }.
-export async function createSketch(data) {
-	const res = await fetch(`${SKETCH_API_URL}/api/sketches`, {
+// Add a plant. `data` looks like { name, species }.
+export async function createPlant(data) {
+	const res = await fetch(`${PLANT_API_URL}/api/plants`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify(data)
 	});
 
 	if (!res.ok) {
-		throw new Error(`Sketch API responded with ${res.status}`);
+		throw new Error(`Plant API responded with ${res.status}`);
 	}
 
 	return res.json();
 }
 
-// Change some fields of one sketch, e.g. changes = { favourite: true }.
-// Gives back the updated sketch, or null if there is no sketch with that id.
-export async function updateSketch(id, changes) {
-	const res = await fetch(`${SKETCH_API_URL}/api/sketches/${id}`, {
+// Change some fields of one plant, e.g. changes = { favourite: true }.
+// Gives back the updated plant, or null if there is no plant with that id.
+export async function updatePlant(id, changes) {
+	const res = await fetch(`${PLANT_API_URL}/api/plants/${id}`, {
 		method: 'PATCH',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify(changes)
@@ -59,16 +59,16 @@ export async function updateSketch(id, changes) {
 	}
 
 	if (!res.ok) {
-		throw new Error(`Sketch API responded with ${res.status}`);
+		throw new Error(`Plant API responded with ${res.status}`);
 	}
 
 	return res.json();
 }
 
-// Delete one sketch. Gives back true if it was deleted, false if there was
-// no sketch with that id.
-export async function deleteSketch(id) {
-	const res = await fetch(`${SKETCH_API_URL}/api/sketches/${id}`, {
+// Delete one plant. Gives back true if it was deleted, false if there was
+// no plant with that id.
+export async function deletePlant(id) {
+	const res = await fetch(`${PLANT_API_URL}/api/plants/${id}`, {
 		method: 'DELETE'
 	});
 
@@ -78,7 +78,7 @@ export async function deleteSketch(id) {
 
 	// A successful delete answers 204 (No Content), so there is no body to read.
 	if (!res.ok) {
-		throw new Error(`Sketch API responded with ${res.status}`);
+		throw new Error(`Plant API responded with ${res.status}`);
 	}
 
 	return true;
