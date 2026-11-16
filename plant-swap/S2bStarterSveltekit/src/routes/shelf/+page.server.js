@@ -13,11 +13,14 @@
 import { error } from '@sveltejs/kit';
 import { fetchPlants } from '#lib/server/plantApi.js';
 
-export async function load() {
+export async function load({ url }) {
 	try {
+		const light = url.searchParams.get('light');
+
 		// await means: pause here until Express answers, then carry on.
-		const plants = await fetchPlants();
-		return { plants };
+        const plants = await fetchPlants(light);
+
+        return { plants, light };
 	} catch (err) {
 		console.error('Failed to reach the Plant API:', err.message);
 

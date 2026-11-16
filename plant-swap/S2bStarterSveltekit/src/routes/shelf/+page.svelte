@@ -101,7 +101,7 @@
 </script>
 
 <main>
-	<h1>Plant Gallery</h1>
+	<h1>Plant Shelf</h1>
 	<p><a href="/">← Home</a></p>
 
 	{#if listError}
@@ -138,6 +138,15 @@
 			</li>
 		{/each}
 	</ul>
+
+	<h2>Filter</h2>
+	<strong>Light needs:</strong>
+	<nav>
+		<a href="/shelf">All</a>
+		<a href="/shelf?light=low">Low</a>
+		<a href="/shelf?light=medium">Medium</a>
+		<a href="/shelf?light=bright">Bright</a>
+	</nav>
 
 	<h2>Add a plant</h2>
 	<form onsubmit={handleSubmit}>

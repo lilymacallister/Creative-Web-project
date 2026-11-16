@@ -45,7 +45,7 @@ export async function createPlant(data) {
 	return res.json();
 }
 
-// Change some fields of one plant, e.g. changes = { favourite: true }.
+// Change some fields of one plant, e.g. changes = { swapped: true }.
 // Gives back the updated plant, or null if there is no plant with that id.
 export async function updatePlant(id, changes) {
 	const res = await fetch(`${PLANT_API_URL}/api/plants/${id}`, {
