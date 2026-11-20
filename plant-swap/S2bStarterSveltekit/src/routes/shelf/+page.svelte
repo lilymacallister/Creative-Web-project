@@ -14,6 +14,10 @@
 	// change straight after an add, star or delete without a reload.
 	let plants = $state(data.plants);
 
+	$effect(() => {
+		plants = data.plants;
+	});
+
 	// ADD — the form. A plain fetch() to OUR OWN /api/plants route
 	// (src/routes/api/plants/+server.js), never straight to Express.
 	// SvelteKit forwards it to Express.
@@ -112,7 +116,7 @@
 		{#each plants as plant (plant.id)}
 			<li class="plant-card" style="border-left-color: {plant.swapped ? "#999999" : "#99DD44"} ">
 				<div class="primary-info-section">
-					<strong>{plant.species}</strong>
+					<strong><a href={`/shelf/${plant.id}`}>{plant.species}</a></strong>
 					<span class="name">from {plant.name}</span>
 				</div>
 				<div class="secondary-info-section">
@@ -121,7 +125,7 @@
 				</div>
 				<div class="buttons">
 					<button
-						class="icon-button"
+						class="icon-button swap"
 						onclick={() => toggleSwapped(plant)}
 						title="Toggle swapped"
 					>
@@ -143,9 +147,9 @@
 	<strong>Light needs:</strong>
 	<nav>
 		<a href="/shelf">All</a>
-		<a href="/shelf?light=low">Low</a>
-		<a href="/shelf?light=medium">Medium</a>
-		<a href="/shelf?light=bright">Bright</a>
+		<a href="/shelf?light=Low">Low</a>
+		<a href="/shelf?light=Medium">Medium</a>
+		<a href="/shelf?light=Bright">Bright</a>
 	</nav>
 
 	<h2>Add a plant</h2>
@@ -222,6 +226,9 @@
 		font-size: 1.5rem;
 		cursor: pointer;
 		color: #ccc;
+	}
+	.icon-button.swap:hover {
+		color: #1cb93e;
 	}
 	.icon-button.delete:hover {
 		color: #b91c1c;

@@ -19,12 +19,23 @@
 import { PLANT_API_URL } from '$app/env/private';
 
 // Get every plant.
-export async function fetchPlants() {
+export async function fetchPlants(light) {
 	// await means: pause here until Express answers, then carry on.
-	const res = await fetch(`${PLANT_API_URL}/api/plants`);
+	const res = await fetch(`${PLANT_API_URL}/api/plants?light=${light}`);
 
 	if (!res.ok) {
 		throw new Error(`Plant API responded with ${res.status}`);
+	}
+
+	return res.json();
+}
+
+export async function getPlant(id) {
+	// await means: pause here until Express answers, then carry on.
+	const res = await fetch(`${PLANT_API_URL}/api/plants/${id}`);
+
+	if (!res.ok) {
+		throw new Error(`No plant with that ID could be found.`);
 	}
 
 	return res.json();

@@ -32,11 +32,26 @@ app.use((req, res, next) => {
 app.get('/api/plants', async (req, res) => {
 	try {
 		// await means: pause here until the database answers, then carry on.
-		const plants = await plantData.getAll();
+		const plants = await plantData.getAll(req.query.light);
 		res.json(plants);
 	} catch (err) {
 		console.error('Failed to read plants:', err.message);
 		res.status(500).json({ error: 'Could not read plants' });
+	}
+});
+
+app.get('/api/plants/:id', async (req, res) => {
+	try {
+		const plant = await plantData.getById(req.params.id);
+
+		if (!plant) {
+			return res.status(404).json({ error: `No plant found with id ${req.params.id}` });
+		}
+
+		res.json(plant);
+	} catch (err) {
+		console.error('Failed to read plant:', err.message);
+		res.status(500).json({ error: 'Could not read plant' });
 	}
 });
 

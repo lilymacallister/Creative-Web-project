@@ -12,8 +12,16 @@
 import Plant from '../models/Plant.js';
 
 // READ — every plant in the collection.
-export async function getAll() {
-	return Plant.find();
+export async function getAll(light) {
+	if (light && light != "null") {
+		return Plant.find({lightNeeds: light});
+	} else {
+		return Plant.find();
+	}
+}
+
+export async function getById(id) {
+	return Plant.findById(id);
 }
 
 // CREATE — save a new plant. `data` holds name, species and careInstructions.
