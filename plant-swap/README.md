@@ -22,7 +22,7 @@ Runs on port **5173**.
 
 **Where is it decided?**
 
-Express connects to the Mongoose cluster, stored in `S2bStarterExpress\.env`. The database name is `lilyPlantShelf`, also stored in this file, and the collection name is `Plant`, determined by the name of the model (`S2bStarterExpress\models\Plant.js`).
+Express connects to the Mongoose cluster, stored in `S2bStarterExpress\.env`. The database name is `lilyPlantShelf`, also stored in this file, and the collection name is `plants`, determined by the lowercase, pluralized name of the model (`S2bStarterExpress\models\Plant.js`).
 
 **Follow the filter**
 
