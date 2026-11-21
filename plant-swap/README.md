@@ -36,4 +36,4 @@ Express connects to the Mongoose cluster, stored in `S2bStarterExpress\.env`. Th
 
 The plant's ID is stored in the "_id" feild in MongoDB, and is automatically generated. It is unique to each plant. In the Express sends it is stored the same as in MongoDb - once again as a string - and this string is used in the URLs when searching for a specific plant.
 
-Express doesn't create the ID itself - it gets it from the Mongoose database. The SvelteKit code was adjusted to make sure the ID was clearly referenced whenever needed, such as each plant card linking to the plant's individual page - such as `<a href={`/shelf/${plant.id}`}>{plant.species}</a>`.
+Express doesn't create the ID itself - it gets it from the Mongoose database. The SvelteKit code was adjusted to make sure the ID was clearly referenced whenever needed, such as each plant card linking to the plant's individual page - such as `<a href={\`/shelf/${plant.id}\`}>{plant.species}</a>`, on line 119.
